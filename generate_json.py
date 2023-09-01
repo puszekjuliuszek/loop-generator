@@ -86,10 +86,11 @@ def random_generation_of_instructions(number_of_instructions: int, arrays: List[
 
     dependencies = []
     for i in range(number_of_instructions + 1):
-        a = random.randint(-5, 5)
-        b = random.randint(-5, 5)
-        c = random.randint(-5, 5)
-        d = random.randint(-5, 5)
+        # a = random.randint(-5, 5)
+        # b = random.randint(-5, 5)
+        # c = random.randint(-5, 5)
+        # d = random.randint(-5, 5)
+        a, b, c, d = 0, 0, 0, 0
 
         dependencies.append(generate_dependency([(a, b), (c, d)]))
     return generate_list_of_instructions(number_of_instructions, names, permutations, dependencies, computations)
@@ -143,21 +144,21 @@ def fill_in_arrays(generated_file, arrays):
         generated_file['arrays'].append(array_name + '[{}]'.format(dim_string))
 
 
-def generation_pipeline():
+def generation_pipeline(i):
     arrays = generate_arrays()
     instructions = instruction_generation(arrays)
     file = init_of_json_file()
     fill_in_arrays(file, get_unique_arrays(arrays))
     file["instructions"] = instructions
-    filename = get_timestamp().replace(".", "") + '.json'
+    filename = str(i) + '.json'
     file_destination = os.path.join(json_input_path, filename)
     with open(file_destination, 'w') as fp:
         json.dump([file], fp)
 
 
 def generate_files():
-    for _ in range(number_of_programs_to_generate):
-        generation_pipeline()
+    for i in range(number_of_programs_to_generate):
+        generation_pipeline(i)
 
 
 def main():

@@ -16,7 +16,7 @@ def add_includes(filename):
             second_idx = idx
 
     content[first_idx] = "#include <init_dyn_array.h>"
-    content[second_idx] = "#include <pips_runtime.h>"
+    content[second_idx] = "#include <pips_runtime.h>\n\n#define matSize 2048L\n#define maxTest 3"
     rewrite(filename, content)
 
 
@@ -41,15 +41,19 @@ def add_3D_tiling_label(filename):
     content = get_content(filename)
     start_index = False
     first = -1
+    second = -1
     for idx, line in enumerate(content):
         if 'clock_t start = clock();' in line:
             start_index = True
         if 'clock_t stop = clock();' in line:
             start_index = False
+            second = idx
         if start_index and 'for' in line:
             if first < 0:
                 first = idx
-    content[first] = '#pragma @ICE loop=tile \n' + content[first]
+    content[first] = """tLoop = 1.0e10;\nfor (tests=0; tests<maxTest; tests++){\n#pragma @ICE loop=matmul \n""" + \
+                     content[first]
+    content[second] += """\nt = stop - start;\nif (t<tLoop) tLoop = t;\n}"""
     rewrite(filename, content)
 
 
@@ -94,7 +98,7 @@ def iterator_init(filename):
         if start and 'for (int' in line:
             content[idx] = line[:5] + line[8:]
 
-    content.insert(start_index, 'int i,j,k,l;')
+    content.insert(start_index, 'int i,j,k,l;\ndouble t, tLoop, rate;')
 
     rewrite(filename, content)
 
@@ -127,7 +131,7 @@ def preprocess_time(filename):
     for idx, line in enumerate(content):
         if 'printf' in line:
             right_index = idx
-    content[right_index] = 'printf("%7.5lf\\n",elapsed*1.0e3);'
+    content[right_index] = 'printf("Matrix size = %ld | ", matSize);\nprintf("Time        = %7.5lf ms | ", tLoop * 1.0e3);\nrate = (2.0 * matSize) * matSize * (matSize / tLoop);\nprintf("Rate        = %.2e MFLOP/s\n", rate * 1.0e-6);'
     rewrite(filename, content)
 
 

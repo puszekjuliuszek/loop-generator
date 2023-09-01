@@ -2,7 +2,7 @@ import os
 
 loop_nest_level = 2
 
-number_of_programs_to_generate = 1
+number_of_programs_to_generate = 2000
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 json_input_path = os.path.join(PROJECT_PATH, 'input')
