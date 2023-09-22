@@ -131,7 +131,7 @@ def preprocess_time(filename):
     for idx, line in enumerate(content):
         if 'printf' in line:
             right_index = idx
-    content[right_index] = 'printf("Matrix size = %ld | ", matSize);\nprintf("Time        = %7.5lf ms | ", tLoop * 1.0e3);\nrate = (2.0 * matSize) * matSize * (matSize / tLoop);\nprintf("Rate        = %.2e MFLOP/s\n", rate * 1.0e-6);'
+    content[right_index] = 'printf("Matrix size = %ld | ", matSize);\nprintf("Time        = %7.5lf ms | ", tLoop * 1.0e3);\nrate = (2.0 * matSize) * matSize * (matSize / tLoop);\nprintf("Rate        = %.2e MFLOP/s", rate * 1.0e-6);'
     rewrite(filename, content)
 
 
