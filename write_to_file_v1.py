@@ -115,7 +115,6 @@ int main(int argc, const char* argv[])
         """Append the end to the feature.c"""
         end_c = """
     clock_t stop = clock();
-    double elapsed = ((double)(stop - start)) / CLOCKS_PER_SEC;
     printf("%f", elapsed); """
         self.append_text_to_file(str(end_c))
 
