@@ -1,8 +1,8 @@
 import os
 
-loop_nest_level = 2
+loop_nest_level = 3
 
-number_of_programs_to_generate = 2000
+number_of_programs_to_generate = 10
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 json_input_path = os.path.join(PROJECT_PATH, 'input')
@@ -25,7 +25,7 @@ number_of_computations_range = (1, 1)
 number_of_arrays = (1, 2)
 
 deps_range = (-5, 5)
-loop_nest_level_range = (2, 2)
+loop_nest_level_range = (3, 3)
 
 array_type_options = ['int']
 array_init_options = ['random']

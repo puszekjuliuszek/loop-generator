@@ -145,7 +145,7 @@ def print_array(generated_code, arrays):
     whole_argument = whole_argument[:len(whole_argument) - 1]
     generated_code.append('static void print_array({})'.format(whole_argument))
     generated_code.append('{')
-    generated_code.append('int i,j,k,l;')
+    generated_code.append('int tests, i,j,k,l;')
     for array in arrays:
         argument_string, array_name, array_dim, _ = generate_argument_string(array)
         generated_code.append("POLYBENCH_DUMP_START;")

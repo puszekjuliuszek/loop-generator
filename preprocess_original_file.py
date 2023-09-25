@@ -98,7 +98,7 @@ def iterator_init(filename):
         if start and 'for (int' in line:
             content[idx] = line[:5] + line[8:]
 
-    content.insert(start_index, 'int i,j,k,l;\ndouble t, tLoop, rate;')
+    content.insert(start_index, 'int tests,i,j,k,l;\ndouble t, tLoop, rate;')
 
     rewrite(filename, content)
 

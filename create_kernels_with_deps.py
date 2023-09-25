@@ -35,7 +35,7 @@ def create_cfile_tail(output_file):
     """Append the end to the feature.c"""
     end_c = """
     clock_t stop = clock();
-    double elapsed = ((double)(stop - start)) / CLOCKS_PER_SEC;
+    //double elapsed = ((double)(stop - start)) / CLOCKS_PER_SEC;
     printf("%f", elapsed); """
     with open(output_file, 'a+') as file:
         file.write(end_c)

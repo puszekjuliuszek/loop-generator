@@ -120,7 +120,7 @@ def get_unique_arrays(generated_arrays):
     return unique_arrays
 
 
-def init_of_json_file(code_options=(loop_nest_level, 'float', 'random')):
+def init_of_json_file(code_options=(loop_nest_level, 'int', 'random')):
     loop_nest_level, array_type, array_init = code_options
     generated_file = {"array_sizes": {}, "distances": {}, "type": array_type, "init_with": array_init,
                       "loop_nest_level": loop_nest_level, "arrays": [], "instructions": []}
