@@ -1,12 +1,12 @@
 import itertools
 import json
+import os
 import random
+import sys
 from random import randint
 from typing import List, Dict, Tuple
 from auxillary_functions import get_timestamp
 from settings import *
-from settings import loop_nest_level
-from settings import json_input_path
 
 
 def generate_additional_computation(array_name: str, array_access_function: List[int]) -> Dict:
@@ -156,14 +156,19 @@ def generation_pipeline(i):
         json.dump([file], fp)
 
 
-def generate_files():
-    for i in range(number_of_programs_to_generate):
+def generate_files(n):
+    for i in range(n):
         generation_pipeline(i)
 
 
-def main():
-    generate_files()
+def main(n):
+    generate_files(n)
 
 
 if __name__ == '__main__':
-    main()
+    n = sys.argv[1]
+    if n is None:
+        n = number_of_programs_to_generate
+    else:
+        n = int(n)
+    main(n)
