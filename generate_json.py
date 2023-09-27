@@ -166,9 +166,8 @@ def main(n):
 
 
 if __name__ == '__main__':
-    n = sys.argv[1]
-    if n is None:
+    if len(sys.argv) < 2:
         n = number_of_programs_to_generate
     else:
-        n = int(n)
+        n = int(sys.argv[1])
     main(n)
